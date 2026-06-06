@@ -42,7 +42,6 @@ jobs:
     - name: gitleaks install
       run: sudo apt install gitleaks   
     - name: gitleaks scan
-      run: - name: Run Gitleaks
       run: gitleaks detect source . -r gitleaks-report.json -f json
     - name: npx install
       run: npm install -g npm-check-updates
