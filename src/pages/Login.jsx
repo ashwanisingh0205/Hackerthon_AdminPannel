@@ -28,6 +28,7 @@ export default function Login() {
     e.preventDefault();
     setError('');
     setLoading(true);
+    navigate('/home');
     
     try {
       const response = await api.post('api/admin/login', {
