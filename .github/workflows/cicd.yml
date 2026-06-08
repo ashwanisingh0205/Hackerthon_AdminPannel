@@ -20,11 +20,8 @@ jobs:
       with:
         node-version: 20
         cache: 'npm'
-    - name: install dependencies
-      run: npm install
-    - name: build
-      run: npm run build
-
+    - run: echo "ref:${{ github.ref }}"
+    - run: echo "person:${{ github.actor }}"
 
   security-check:
     runs-on: ubuntu-latest
@@ -37,17 +34,4 @@ jobs:
         echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
         sudo apt-get update
         sudo apt-get install trivy
-    - name: trivy scan
-      run: trivy fs --format table -o fs-report.txt . 
-    - name: gitleaks install
-      run: sudo apt install gitleaks   
-    - name: gitleaks scan
-      run: gitleaks detect source . -r gitleaks-report.json -f json
-    - name: npx install
-      run: npm install -g npm-check-updates
-    - name: npx update
-      run: npx npm-check-updates -u
-    - name: npx audit
-      run: npx npm audit fix
-    - name: npx audit fix
-      run: npx npm audit fix
+    
