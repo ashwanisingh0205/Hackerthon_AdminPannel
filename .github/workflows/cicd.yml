@@ -35,7 +35,17 @@ jobs:
         echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
         sudo apt-get update
         sudo apt-get install trivy
-      
+    - name: Debug Sonar
+      run: |
+        echo "URL=$SONAR_HOST_URL"
+        if [ -n "$SONAR_TOKEN" ]; then
+          echo "TOKEN_FOUND"
+          else
+            echo "TOKEN_MISSING"
+          fi
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}    
 
   sonarqube:
     runs-on: self-hosted
