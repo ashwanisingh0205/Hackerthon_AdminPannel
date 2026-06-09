@@ -25,6 +25,7 @@ jobs:
 
   security-check:
     runs-on: self-hosted
+    needs: build
     steps:
     - uses: actions/checkout@v3
     - name: trivy setup
@@ -38,6 +39,7 @@ jobs:
 
   sonarqube:
     runs-on: self-hosted
+    needs: build
     steps:
     - uses: actions/checkout@v6
       with:
